@@ -96,17 +96,25 @@ class Game extends React.Component {
                 'row: ' + Math.ceil((history[move].squareNumber+1)/3) + " ) " + (((move%2)===0)? "O":"X") +" was played"; 
             } else {
                 desc = "Go to the start";
-            }  
-            return(
-                <li key={move}>
-                    <button onClick={()=> this.jumpTo(move)}>{desc}</button>
-                </li>
-            );
+            }
 
+            if (this.state.stepNumber===move) {
+                return(
+                    <li key={move}>
+                        <button onClick={()=> this.jumpTo(move)}><b>{desc}</b></button>
+                    </li>
+                );    
+            } else { 
+                return(
+                    <li key={move}>
+                        <button onClick={()=> this.jumpTo(move)}>{desc}</button>
+                    </li>
+                );
+            }
         });
         let status;
         if(winner) {
-            status = "winner" + winner;
+            status = "winner " + winner;
         } else {
             status = "next is " + (this.state.xIsNext? "X" : "O");
         }
